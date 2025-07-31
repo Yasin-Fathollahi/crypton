@@ -3,7 +3,6 @@ import CoinRow from './coin-data-row';
 
 export default async function CoinsTable({ limit }) {
   const coins = await getCoinsData(limit);
-  console.log(coins);
 
   // {symbol: 'BTC_IRT', price: '10483091070', daily_change_price: -0.45, low: '10406737043', high: '10574328061', …}
 
@@ -29,7 +28,7 @@ export default async function CoinsTable({ limit }) {
             <th className="py-4 px-2">نام رمز ارز</th>
             <th className="py-4 px-2">آخرین قیمت</th>
             <th className="py-4 px-2">تغییرات</th>
-            <th className="py-4 px-2">نمودار 24 ساعت</th>
+            <th className="py-4 px-2 ">نمودار 24 ساعت (به دلار آمریکا)</th>
             <th className="py-4 px-2"></th>
           </tr>
         </thead>
