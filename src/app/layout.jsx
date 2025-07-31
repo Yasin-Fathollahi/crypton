@@ -8,7 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body className="font-vazir bg-linear-to-b/increasing from-25% from-slate-900 via-50% via-black to-slate-950 text-white">
+      <body className="font-vazir bg-linear-to-b/increasing from-25% from-slate-900 via-50% via-black to-slate-950 text-white/90">
         {children}
       </body>
     </html>
