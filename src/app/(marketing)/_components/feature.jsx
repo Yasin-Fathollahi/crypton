@@ -5,7 +5,7 @@ export default function Feature({ Icon, title, description }) {
         <Icon size="32" />
       </div>
       <h3 className="pb-2 font-semibold">{title}</h3>
-      <p className="text-center text-white/75">{description}</p>
+      <p className="text-center text-gray-400">{description}</p>
     </figure>
   );
 }
