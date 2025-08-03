@@ -14,7 +14,7 @@ export default function SocialLogos() {
   return (
     <ul className="flex gap-4 text-gray-200/60">
       <li className={linkClasses}>
-        <Link href="#" className="p-1.5" target="_blank">
+        <Link href="/" className="p-1.5" target="_blank">
           <FaXTwitter className="size-6" />
         </Link>
       </li>
