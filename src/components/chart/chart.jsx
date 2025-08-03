@@ -20,8 +20,6 @@ ChartJS.register(
 );
 
 export default function Chart({ prices, changePercentage }) {
-  console.log(changePercentage);
-
   const isRising = changePercentage > 0;
   const { borderColor, backgroundColor } = isRising
     ? {
@@ -34,7 +32,7 @@ export default function Chart({ prices, changePercentage }) {
       };
   const labels = prices.map(() => '');
 
-  const limitedPrices = prices.filter((p, index) => index % 5 === 0);
+  // const limitedPrices = prices.filter((p, index) => index % 5 === 0);
   const data = {
     labels,
     datasets: [

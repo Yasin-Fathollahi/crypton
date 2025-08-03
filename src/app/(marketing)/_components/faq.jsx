@@ -13,7 +13,7 @@ export default function FaqSection() {
   }
 
   return (
-    <section className="bg-slate-900/90 flex justify-between gap-24 py-32 px-44">
+    <section className="bg-slate-900/50 flex justify-between gap-24 py-32 px-44 border-b-3 border-solid border-slate-700/80">
       <div>
         <h2 className="text-3xl font-bold pt-4">سوالات متداول شما</h2>
       </div>
@@ -51,7 +51,7 @@ export default function FaqSection() {
             question="چطور می‌توان ارز دیجیتال خرید؟"
           >
             <p>برای خرید ارز دیجیتال معمولاً باید مراحل زیر را طی کنید:</p>
-            <ol className="list-decimal list-inside mt-4">
+            <ol className="list-decimal list-inside mt-4 flex flex-col gap-2">
               <li>در یک صرافی معتبر ثبت‌نام کنید.</li>
               <li>هویت خود را احراز کنید.</li>
               <li>حساب خود را شارژ کنید (با کارت بانکی یا تتر).</li>
@@ -79,7 +79,7 @@ export default function FaqSection() {
             question="چطور می‌توان ارز دیجیتال به دست آورد؟"
           >
             <p>چند راه برای به دست آوردن ارز دیجیتال وجود دارد:</p>
-            <ul className="list-disc list-inside mt-4">
+            <ul className="list-disc list-inside mt-4 flex flex-col gap-2">
               <li>خرید مستقیم از صرافی</li>
               <li>
                 ماینینگ (استخراج) ارزهایی مثل بیت‌کوین (نیاز به سخت‌افزار و برق
@@ -94,6 +94,38 @@ export default function FaqSection() {
                 می‌کنند
               </li>
               <li>فریلنسری و دریافت دستمزد به صورت ارز دیجیتال</li>
+            </ul>
+          </FaqQuestion>
+          <FaqQuestion
+            open={open}
+            id="q6"
+            isOpen={openQuestion === 'q6'}
+            question="چرا صرافی کریپتون؟"
+          >
+            <ul className="list-disc list-inside mt-4 flex flex-col gap-2">
+              <li>
+                <strong>نمایش قیمت لحظه ای ارز دیجیتال:</strong> بازار ارزهای
+                دیجیتال به‌صورت 24 ساعته فعال است و کاربران نیاز دارند تا
+                قیمت‌ها را به‌صورت لحظه‌ای مشاهده کنند. کریپتون این امکان را
+                برای شما فراهم می‌کند تا همیشه از قیمت‌های بروز بیتکوین، اتریوم،
+                تتر و دیگر رمز ارز ها مطلع باشید.
+              </li>
+              <li>
+                <strong>واریز و برداشت آنی:</strong> سرعت در واریز و برداشت
+                ارزهای دیجیتال و ریال در کریپتون باعث می‌شود که شما هیچ فرصت
+                سرمایه‌گذاری را از دست ندهید.
+              </li>
+              <li>
+                <strong>پشتیبانی 24/7:</strong> تیم پشتیبانی حرفه‌ای کریپتون در
+                تمامی ساعات شبانه‌روز آماده پاسخگویی به سوالات و مشکلات شماست.
+                شما می‌توانید از طریق چت آنلاین، تیکت، تماس تلفنی یا حتی ربات
+                تلگرام با ما در ارتباط باشید.
+              </li>
+              <li>
+                <strong>خرید آسان ارز دیجیتال:</strong> با استفاده از بخش خرید
+                آنی و سریع ارز دیجیتال، می‌توانید با کارت بانکی خود برای
+                خریدآسان ارز دیجیتال محبوب و مورد نظر خود اقدام کنید.
+              </li>
             </ul>
           </FaqQuestion>
         </ul>

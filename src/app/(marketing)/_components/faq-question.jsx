@@ -17,8 +17,8 @@ export default function FaqQuestion({ question, children, isOpen, id, open }) {
         </div>
       </button>
       <div
-        className={`text-gray-400 line text-lg/relaxed transition-all duration-300  overflow-y-hidden ease-in-out ${
-          isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0 h-0'
+        className={`text-gray-400 line text-lg/loose transition-all duration-300  overflow-y-hidden ease-in-out ${
+          isOpen ? 'max-h-2xl opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         {children}

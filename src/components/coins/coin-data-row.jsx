@@ -14,15 +14,12 @@ export default async function CoinRow({
     high,
     id,
   },
-  // {symbol: 'BTC_IRT', price: '10483091070', daily_change_price: -0.45, low: '10406737043', high: '10574328061', …}
 }) {
   const { changePercentage, changeColor } = formatChangePercentage(priceChange);
   const formattedPrice = formatPrice(price);
   const formattedSymbol = symbol.replace('_', '/');
-  console.log(id);
 
   const coinDetails = await getCoinDetails(id, 1);
-  console.log(coinDetails);
   const prices = coinDetails.prices.map((price) => price[1]);
 
   return (

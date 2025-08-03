@@ -1,15 +1,20 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import ArrowDownIcon from '@heroicons/react/24/solid/ArrowDownIcon';
+import CryptonLogo from '@/components/crypton-logo';
 
 export default function Header() {
   return (
     <header className="h-screen text-white relative bg-cover bg-[url(/cubes-unsplash.jpg)] z-10">
       <div className="h-screen w-full absolute top-0 left-0 backdrop-blur-xs -z-20"></div>
       <nav className="bg-linear-to-r from-gray-900 via-30% via-gray-700 to-gray-900 border-solid border-2 border-gray-700/50 rounded-full flex justify-between items-center w-1/2 mx-auto p-2 fixed top-4 left-1/2 -translate-x-1/2">
-        <div className="h-10 w-10 bg-blue-500 rounded-full flex justify-center items-center">
+        {/* <div className="h-10 w-10 bg-blue-500 rounded-full flex justify-center items-center">
           <Link className="font-semibold" href="#">
-            C
+            <CryptonLogo />C
+          </Link>
+        </div> */}
+        <div>
+          <Link href="/">
+            <CryptonLogo nav />
           </Link>
         </div>
         <div className="flex items-center ">

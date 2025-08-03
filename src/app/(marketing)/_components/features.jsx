@@ -9,7 +9,7 @@ import Feature from '../_components/feature';
 export default function Features() {
   return (
     <section className="px-32 pb-32">
-      <h2 className="text-2xl text-gray-400">امکانات کریپتون</h2>
+      <h2 className="text-2xl text-slate-200 font-bold">امکانات کریپتون</h2>
       <article className="flex gap-12 mx-auto w-fit pt-12">
         <Feature
           title="بازارهای معاملاتی پیشرفته"
