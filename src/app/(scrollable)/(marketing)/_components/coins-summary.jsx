@@ -1,4 +1,4 @@
-import CoinsTable from '@/components/coins/coins-table';
+import CoinsTable from '@/components/coins/table/coins-table';
 export default function CoinsSummary() {
   return (
     <section className="pt-32 px-32 pb-24">

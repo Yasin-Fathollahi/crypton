@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import mobileImage from '../../../assets/mobile.webp';
+import mobileImage from '../../../../assets/mobile.webp';
 export default function OnchainSection() {
   return (
     <section className="h-screen px-32 pt-12 bg-white text-gray-900 flex justify-between items-center">

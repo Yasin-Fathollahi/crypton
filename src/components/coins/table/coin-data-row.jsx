@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { formatChangePercentage, formatPrice } from '../../../utils/formatters';
+import {
+  formatChangePercentage,
+  formatPrice,
+} from '../../../../utils/formatters';
 import { getCoinDetails } from 'lib/coins';
-import Chart from '../chart/chart';
+import Chart from '../../chart/chart';
 
 export default async function CoinRow({
   coin: {

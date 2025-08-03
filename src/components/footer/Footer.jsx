@@ -1,16 +1,14 @@
 import SocialLogos from './social-logo-links';
 import FooterLinks from './footer-links';
 import CryptonLogo from '@/components/crypton/crypton-logo';
+import CryptonText from '../crypton/crypton-text';
 export default function Footer() {
   return (
     <footer className="bg-slate-900/50 px-32 pt-24 pb-16">
       <div className="flex gap-4 items-center ">
         <div className="flex gap-4 items-center">
           <CryptonLogo />
-          <p className="font-semibold text-4xl text-white">
-            <span className="text-4xl font-extrabold text-blue-500">ک</span>
-            <span className="text-4xl font-semibold">ریپتون</span>
-          </p>
+          <CryptonText />
         </div>
         <hr className="w-full text-slate-200/60" />
         <SocialLogos />
