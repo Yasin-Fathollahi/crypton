@@ -1,8 +1,8 @@
-import MainNav from '@/components/nav/main-nav';
 import Link from 'next/link';
+import MainNav from '@/components/nav/main-nav';
+import Form from '../_components/form';
 export default async function auth({ searchParams }) {
   const { mode } = await searchParams;
-  console.log(mode);
 
   return (
     <>
@@ -23,42 +23,7 @@ export default async function auth({ searchParams }) {
               </Link>
             </p>
           </div>
-
-          <form action="" className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-slate-300/60 text-sm">
-                لطفا ایمیل خود را وارد کنید
-              </label>
-              <input
-                type="email"
-                name=""
-                id=""
-                placeholder="ایمیل"
-                className="block w-full border-2 border-solid border-slate-700/80 rounded-sm placeholder:text-slate-600/60 px-2 py-2"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="password" className="text-slate-300/60 text-sm">
-                لطفا رمز خود را وارد کنید
-              </label>
-              <input
-                type="password"
-                name=""
-                id=""
-                placeholder="رمز عبور"
-                className="block w-full border-2 border-solid border-slate-700/80 rounded-sm placeholder:text-slate-600/60 px-2 py-2"
-              />
-            </div>
-            <button className="block bg-blue-500 rounded-sm py-2 font-bold text-lg hover:bg-blue-600 hover:cursor-pointer">
-              {mode === 'login' ? 'ورود' : 'ثبت نام'}
-            </button>
-            <Link
-              href={`auth/${mode}`}
-              className="text-sm text-blue-400 text-bold"
-            >
-              رمز عبورم را فراموش کرده ام
-            </Link>
-          </form>
+          <Form mode={mode} />
         </div>
       </main>
       <footer>
