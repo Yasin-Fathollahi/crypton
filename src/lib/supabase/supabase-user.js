@@ -1,25 +1,34 @@
-import supabase from './supabase/supabase.js';
-export async function getCurrentUserData() {
-  const {
-    data: { user },
-    error: authError,
-  } = await supabase.auth.getUser();
+import { redirect } from 'next/navigation';
+import { supabase } from './supabase-client.js';
+export async function getCurrentUserData(columns) {
+  try {
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
 
-  if (!user || authError) {
-    throw new Error('Not authenticated');
+    if (!user || authError) {
+      throw authError;
+      // throw new Error('Not authenticated');
+    }
+
+    const { data: profile, error: dbError } = await supabase
+      .from('users')
+      .select(...columns)
+      .eq('user_id', user.id)
+      .single();
+
+    if (dbError) {
+      throw new Error(dbError.message);
+    }
+
+    return profile;
+  } catch (error) {
+    console.error(error);
+    if (error.message === 'Not authenticated') {
+      redirect('/auth?mode?login');
+    }
   }
-
-  const { data: profile, error: dbError } = await supabase
-    .from('users')
-    .select('*')
-    .eq('id', user.id)
-    .single();
-
-  if (dbError) {
-    throw new Error(dbError.message);
-  }
-
-  return profile;
 }
 
 export async function updatePfp(file, userId) {

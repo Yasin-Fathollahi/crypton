@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import MainNav from '@/components/nav/main-nav';
-import Form from '../_components/form';
+import Form from './_components/form';
 export default async function auth({ searchParams }) {
   const { mode } = await searchParams;
 

@@ -5,7 +5,7 @@ import ErrorBox from '@/components/error';
 
 export default async function CoinsTable({ limit }) {
   const { data: coins, error } = await getCoinsData(limit);
-  console.log(coins);
+  // console.log(coins);
 
   // {symbol: 'BTC_IRT', price: '10483091070', daily_change_price: -0.45, low: '10406737043', high: '10574328061', …}
 

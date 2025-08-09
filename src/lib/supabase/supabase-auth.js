@@ -1,5 +1,5 @@
-import { supabase } from './supabase/supabase.js';
-
+import { supabase } from './supabase-client.js';
+// import cookie
 export async function authenticateWithEmail({ email, password }, authType) {
   const { data, error } =
     authType === 'signup'
@@ -12,7 +12,8 @@ export async function authenticateWithEmail({ email, password }, authType) {
           password,
         });
 
-  if (error) throw new Error(error.message);
+  if (error) throw error;
+  console.log(data);
 
   return data.user;
 }
