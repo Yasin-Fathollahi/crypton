@@ -6,7 +6,7 @@ export default async function auth({ searchParams }) {
 
   return (
     <>
-      <MainNav />
+      <MainNav isAuth />
       <main className="grow">
         <div className="p-12 rounded-lg bg-slate-900/40 w-2/5 mx-auto mt-32">
           <div className="mb-4">

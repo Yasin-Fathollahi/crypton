@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import CryptonText from '@/components/crypton/crypton-text';
 import CryptonLogo from '@/components/crypton/crypton-logo';
+import LogoutButton from './auth-button';
+import { verifySession } from 'lib/session';
 
 function NavLinks() {
   return (
@@ -29,7 +31,23 @@ function NavLinks() {
   );
 }
 
-export default function MainNav({ isHome }) {
+export default async function MainNav({ isHome, isAuth }) {
+  let authData, authButton;
+  if (!isAuth) {
+    authData = await verifySession(true);
+
+    authButton = authData.sessionId ? (
+      <LogoutButton sessionId={authData.sessionId} />
+    ) : (
+      <Link
+        href="auth/?mode=login"
+        className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-full font-semibold hover:cursor-pointer"
+      >
+        ثبت نام / ورود
+      </Link>
+    );
+  }
+
   let content = (
     <nav className="flex justify-between items-center w-full mx-auto p-4 ">
       <div className="flex items-center gap-18">
@@ -43,14 +61,7 @@ export default function MainNav({ isHome }) {
         </div>
         <NavLinks />
       </div>
-      <div className="flex items-center gap-8">
-        <Link
-          href="auth/?mode=login"
-          className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-full font-semibold hover:cursor-pointer"
-        >
-          ثبت نام / ورود
-        </Link>
-      </div>
+      <div className="flex items-center gap-8">{!isAuth && authButton}</div>
     </nav>
   );
 
@@ -62,15 +73,10 @@ export default function MainNav({ isHome }) {
             <CryptonLogo nav />
           </Link>
         </div>
-        <div className="flex items-center ">
+        <div className="flex items-center">
           <NavLinks />
         </div>
-        <Link
-          href="auth/?mode=login"
-          className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-full font-semibold"
-        >
-          ثبت نام / ورود
-        </Link>
+        {authButton}
       </nav>
     );
   }

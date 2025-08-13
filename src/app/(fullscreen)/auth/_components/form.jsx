@@ -2,11 +2,13 @@
 import { useActionState } from 'react';
 import PasswordInput from '../_components/password-input';
 // import { authAction } from 'lib/supabase/supabase-actions';
-import { signup } from 'lib/actions';
+import { authAction } from 'lib/auth-actions';
 import Link from 'next/link';
 
 export default function Form({ mode }) {
-  const [formState, formAction, isPending] = useActionState(signup);
+  const [formState, formAction, isPending] = useActionState(
+    authAction.bind(null, mode)
+  );
 
   let buttonText;
   if (!isPending) {
