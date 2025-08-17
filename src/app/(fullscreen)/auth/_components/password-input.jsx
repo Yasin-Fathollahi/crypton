@@ -53,6 +53,7 @@ export default function PasswordInput() {
         type="button"
         onClick={handleToggleEye}
         className="absolute left-4 top-1/2 -translate-y-1/2 hover:cursor-pointer"
+        aria-label={isOpen ? 'Hide password' : 'Hide password'}
       >
         {eye}
       </button>

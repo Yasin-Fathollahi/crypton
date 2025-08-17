@@ -1,29 +1,27 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import {
   formatChangePercentage,
   formatPrice,
 } from '../../../../utils/formatters';
-import { getCoinDetails } from 'lib/coins';
-import Chart from '../../chart/chart';
+// import { getCoinDetails } from 'lib/coins';
+// import Chart from '../../chart/chart';
+const Chart = dynamic(() => import('../../chart/chart'), {
+  loading: () => <p className="text-white text-center">درحال دریافت چارت...</p>,
+  // ssr: false,
+});
 
 export default async function CoinRow({
-  coin: {
-    image,
-    symbol,
-    price,
-    daily_change_price: priceChange,
-    low,
-    high,
-    id,
-  },
+  coin: { image, symbol, price, daily_change_price: priceChange, details },
 }) {
   const { changePercentage, changeColor } = formatChangePercentage(priceChange);
   const formattedPrice = formatPrice(price);
   const formattedSymbol = symbol.replace('_', '/');
 
-  const coinDetails = await getCoinDetails(id, 1);
-  const prices = coinDetails.prices.map((price) => price[1]);
+  // const coinDetails = await getCoinDetails(id, 1);
+  const prices = details.prices.map((price) => price[1]);
+  // console.log('🚀 ~ coin-data-row.jsx:28 ~ CoinRow ~ prices:', details);
 
   return (
     <tr className="border-t-3 border-solid border-slate-700/80">

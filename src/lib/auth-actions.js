@@ -46,9 +46,11 @@ async function signup(prevState, formData) {
 
 async function login(prevState, formData) {
   const fd = Object.fromEntries(formData.entries());
-  const { userId, errors } = await verifyLoginCredentials(fd);
+  const { data: userId, errors } = await verifyLoginCredentials(fd);
   if (!userId) {
-    return errors;
+    console.error(errors);
+
+    return { data: null, errors };
   }
 
   try {

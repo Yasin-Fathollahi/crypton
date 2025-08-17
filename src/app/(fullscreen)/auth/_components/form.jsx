@@ -7,7 +7,8 @@ import Link from 'next/link';
 
 export default function Form({ mode }) {
   const [formState, formAction, isPending] = useActionState(
-    authAction.bind(null, mode)
+    authAction.bind(null, mode),
+    { data: {}, errors: { email: [], password: [] } }
   );
 
   let buttonText;

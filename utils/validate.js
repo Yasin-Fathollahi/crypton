@@ -1,31 +1,20 @@
 import { supabase } from 'lib/supabase/supabase-client';
 const bcrypt = require('bcrypt');
+
 export function validate(data) {
-  const { email, password, fullname = undefined } = data;
+  const { email, password, fullname } = data;
+
   const errors = {
     fullname: [],
     email: [],
     password: [],
   };
 
-  const formattedData = {
-    email: email.trim(),
-    password: password.trim(),
-  };
-
-  if (fullname) {
-    formattedData.fullname = fullname.trim();
-  }
-
-  if (formattedData.email.length === 0 || !email.includes('@')) {
+  if (!email?.trim() || !email.includes('@')) {
     errors.email.push('لطفا ایمیل خود را به درستی وارد کنید.');
   }
 
-  if (formattedData.email.length === 0 || !email.includes('@')) {
-    errors.email.push('لطفا ایمیل خود را به درستی وارد کنید.');
-  }
-
-  if (formattedData.password.length === 0 || password.length < 6) {
+  if (!password?.trim() || password.length < 6) {
     errors.password.push('رمز شما باید حداقل 6 کاراکتر داشته باشد.');
   }
 
@@ -33,20 +22,38 @@ export function validate(data) {
     return { errors, data: null };
   }
 
-  return { data: formattedData };
+  return {
+    data: {
+      ...(fullname ? { fullname: fullname.trim() } : {}),
+      email,
+      password,
+    },
+    errors: null,
+  };
 }
 
 export async function verifyLoginCredentials(userData) {
   const { data: validatedData, errors } = validate(userData);
 
   if (!validatedData) {
-    return errors;
+    return { errors, data: validatedData };
   }
+
+  const credentialErrors = { password: [] };
 
   const { data, error } = await supabase
     .from('profiles')
     .select()
-    .eq('email', validatedData.email);
+    .eq('email', validatedData.email)
+    .limit(1);
+
+  if (!data) {
+    console.log('🚀 ~ validate.js:48 ~ verifyLoginCredentials ~ data:', data);
+    credentialErrors.password.push(
+      'لطفا اینترنت خود را بررسی و دوباره امتحان کنید.'
+    );
+    return { data: null, errors: credentialErrors };
+  }
 
   const passwordIsValid = await bcrypt.compare(
     validatedData.password,
@@ -59,11 +66,11 @@ export async function verifyLoginCredentials(userData) {
       error
     );
 
-    errors.password.push('ایمیل یا رمز عبور نادرست است.');
-    return { userId: null, errors };
+    credentialErrors.password.push('ایمیل یا رمز عبور نادرست است.');
+    return { data: null, errors: credentialErrors };
   }
 
   const userId = data[0].user_id;
 
-  return { userId };
+  return { data: userId, errors: null };
 }

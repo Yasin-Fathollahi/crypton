@@ -19,6 +19,7 @@ export default function Header() {
         </Link>
       </div>
       <Link
+        aria-label="More Information"
         href="#"
         className="absolute bottom-4 left-1/2 -translate-1/2 p-3 rounded-full border-2 border-solid border-gray-700/80  transition-colors duration-500 hover:border-white hover:animate-none animate-pulse"
       >

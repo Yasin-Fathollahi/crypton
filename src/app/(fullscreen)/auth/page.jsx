@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import MainNav from '@/components/nav/main-nav';
 import Form from './_components/form';
+import { redirect } from 'next/navigation';
 export default async function auth({ searchParams }) {
-  const { mode } = await searchParams;
-
+  const mode = (await searchParams)?.mode || redirect('/auth?mode=login');
+  // const mode = (await searchParams?.mode) === 'signup' ? 'signup' : 'login';
   return (
     <>
       <MainNav isAuth />
@@ -16,7 +17,7 @@ export default async function auth({ searchParams }) {
             <p>
               حساب {mode === 'login' ? 'ندارید' : 'دارید'}؟{' '}
               <Link
-                href={`auth/?mode=${mode === 'login' ? 'signup' : 'login'}`}
+                href={`/auth?mode=${mode === 'login' ? 'signup' : 'login'}`}
                 className="text-blue-400"
               >
                 {mode === 'login' ? 'ثبت نام' : 'ورود'}

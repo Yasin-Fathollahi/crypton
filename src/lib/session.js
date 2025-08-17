@@ -28,7 +28,7 @@ async function encrypt(payload) {
 async function decrypt(session) {
   try {
     const { payload } = await jwtVerify(session, key, {
-      algorithms: ['SH256'],
+      algorithms: ['HS256'],
     });
 
     return payload;
@@ -64,7 +64,7 @@ async function createSession(userId) {
     throw error;
   }
   const sessionId = data[0].session_id;
-  await cookieStore.set(cookie.name, sessionId, { ...cookie.options });
+  await cookieStore.set(cookie.name, sessionId, { ...cookie.options, expires });
 }
 
 // async function verifySession() {

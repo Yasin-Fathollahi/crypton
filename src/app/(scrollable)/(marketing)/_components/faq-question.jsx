@@ -9,6 +9,8 @@ export default function FaqQuestion({ question, children, isOpen, id, open }) {
       <button
         onClick={open.bind(null, id)}
         className={`flex justify-between text-2xl font-semibold hover:cursor-pointer w-full py-6`}
+        aria-expanded={isOpen}
+        aria-controls={id}
       >
         <h3>{question}</h3>
         <div>
@@ -17,6 +19,7 @@ export default function FaqQuestion({ question, children, isOpen, id, open }) {
         </div>
       </button>
       <div
+        id={id}
         className={`text-gray-400 line text-lg/loose transition-all duration-300  overflow-y-hidden ease-in-out ${
           isOpen ? 'max-h-2xl opacity-100' : 'max-h-0 opacity-0'
         }`}

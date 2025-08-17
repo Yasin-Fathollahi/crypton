@@ -1,5 +1,5 @@
 import './globals.css';
-import Footer from '@/components/coins/footer/Footer';
+import Footer from '@/components/footer/Footer';
 export const metadata = {
   title: 'کریپتون',
   description: 'راحتی و امنیت در معاملات را با ما تجربه کنید.',

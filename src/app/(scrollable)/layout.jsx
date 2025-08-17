@@ -1,4 +1,4 @@
-import Footer from '@/components/coins/footer/Footer';
+import Footer from '@/components/footer/Footer';
 
 export default function RootLayout({ children }) {
   return (

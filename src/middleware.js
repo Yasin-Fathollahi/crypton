@@ -1,5 +1,3 @@
-import { verifySession } from 'lib/session';
-import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export default async function middleware(request) {
@@ -11,11 +9,13 @@ export default async function middleware(request) {
   if (isProtected) {
     // 2. check for valid session
     // 3. redirect unauthenticated users
-    const cookieStore = await cookies();
-    const sessionId = cookieStore.get('sessionId')?.value;
+    const sessionId = request.cookies.get('sessionId')?.value;
 
     if (!sessionId) {
-      NextResponse.redirect('/auth?mode=login');
+      const url = request.nextUrl.clone();
+      url.pathname = '/auth';
+      url.searchParams.set('mode', 'login');
+      return NextResponse.redirect(url);
     }
   }
 

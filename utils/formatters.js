@@ -3,7 +3,7 @@ const addGrouping = Intl.NumberFormat(['ir'], {
   useGrouping: true,
 }).format;
 
-async function formatPrice(price) {
+function formatPrice(price) {
   const grouped = addGrouping(price);
 
   const persianNumber = digitsEnToFa(grouped);
