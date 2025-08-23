@@ -101,6 +101,8 @@ export default async function getCoinsData(limit, currency) {
     const data = await response.json();
 
     if (!response.ok) {
+      console.log('🚀 ~ coins.js:102 ~ getCoinsData ~ data:', data);
+
       throw new Error(data.error);
     }
     const fixedLimit = currency === 'usdt' ? limit * 2 + 1 : limit * 2 - 1;

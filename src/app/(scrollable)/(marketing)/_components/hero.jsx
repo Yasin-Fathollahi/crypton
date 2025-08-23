@@ -1,15 +1,17 @@
 import Link from 'next/link';
 import ArrowDownIcon from '@heroicons/react/24/solid/ArrowDownIcon';
 import MainNav from '@/components/nav/main-nav';
+import CryptonText from '@/components/crypton/crypton-text';
 
-export default function Header() {
+export default function HeroSection() {
   return (
     <header className="h-screen text-white relative bg-cover bg-[url(/cubes-unsplash.jpg)] z-10">
       <div className="h-screen w-full absolute top-0 left-0 backdrop-blur-xs -z-20"></div>
       <MainNav isHome />
       <div className="flex flex-col justify-center items-center h-full gap-8 pt-4">
-        <h1 className="text-6xl tracking-widest font-bold">
-          کریپتون، لذت یک خرید امن و بی دردسر
+        <h1 className="text-6xl tracking-widest font-bold flex">
+          <CryptonText hero />
+          <span>، لذت یک خرید امن و بی دردسر</span>
         </h1>
         <Link
           href="#"

@@ -1,3 +1,4 @@
+import ErrorBox from '@/components/error';
 import { verifySession } from 'lib/session';
 import { supabase } from 'lib/supabase/supabase-client';
 import { taintUniqueValue } from 'next/dist/server/app-render/rsc/taint';
@@ -6,21 +7,39 @@ import { cache } from 'react';
 export const getUser = cache(async () => {
   // 1. Verify user's session
   const { userId, sessionId } = await verifySession();
-  // 2. Fetch the user data
-  const { data, error } = await supabase
-    .from('profiles')
-    .select()
-    .eq('user_id', userId);
+  try {
+    // 2. Fetch the user data
+    const { data, error } = await supabase
+      .from('profiles')
+      .select()
+      .eq('user_id', userId);
 
-  if (error) {
-    throw error;
+    if (error) {
+      throw error;
+    }
+
+    const user = data[0];
+
+    // 3. filter user data
+    const filteredUser = userDTO({ ...user, sessionId });
+    return {
+      userData: filteredUser,
+      error: null,
+    };
+  } catch (error) {
+    console.error('🚀 ~ user.js:28 ~ error:', error);
+
+    if (error.message === 'TypeError: fetch failed')
+      return {
+        userData: null,
+        error: (
+          <ErrorBox
+            title="عدم اتصال به اینترنت"
+            description="لطفا اتصال اینترنت خود را بررسی و دوباره تلاش کنید."
+          />
+        ),
+      };
   }
-
-  const user = data[0];
-
-  // 3. filter user data
-  const filteredUser = userDTO({ ...user, sessionId });
-  return filteredUser;
 });
 
 function userDTO(user) {

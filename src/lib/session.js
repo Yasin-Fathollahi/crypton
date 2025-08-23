@@ -95,7 +95,7 @@ async function verifySession(noRedirect = false) {
     .eq('session_id', sessionId);
 
   if (error) {
-    throw error;
+    return { error };
   }
 
   const session = data[0];

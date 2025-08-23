@@ -23,4 +23,13 @@ function formatChangePercentage(priceChange) {
   };
 }
 
-export { formatPrice, formatChangePercentage };
+function PersianDateTime(date) {
+  const formatter = Intl.DateTimeFormat('fa-IR', {
+    dateStyle: 'long',
+    timeStyle: 'short',
+  });
+  const formattedDateTime = formatter.format(date);
+  return formattedDateTime;
+}
+
+export { formatPrice, formatChangePercentage, PersianDateTime };

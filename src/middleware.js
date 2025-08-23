@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export default async function middleware(request) {
   // 1. check if the route is protected
-  const protectedRoutes = ['/dashboard'];
+  const protectedRoutes = ['/dashboard', '/profile'];
   const currentPath = request.nextUrl.pathname;
 
   const isProtected = protectedRoutes.includes(currentPath);
@@ -24,5 +24,5 @@ export default async function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/dashboard'],
+  matcher: ['/dashboard', '/profile'],
 };
