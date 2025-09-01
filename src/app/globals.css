@@ -24,3 +24,33 @@
     transform: rotate(1turn);
   }
 }
+
+/* .masked {
+  --fade-amount: 10%;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black var(--fade-amount),
+    black calc(100% - var(--fade-amount)),
+    transparent
+  );
+} */
+
+@layer utilities {
+  @keyframes slide {
+    from {
+      transform: translate(0);
+    }
+    to {
+      transform: translate(100%);
+    }
+  }
+
+  .animate-slide {
+    animation: 15s slide infinite linear;
+  }
+
+  .pause-animation {
+    animation-play-state: paused;
+  }
+}

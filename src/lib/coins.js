@@ -1,5 +1,5 @@
 const coingecko = {
-  baseUrl: 'https://api.coingecko.com/api/v3/coins',
+  baseUrl: 'https://api.coingecko.com/api/v3',
   options: {
     method: 'GET',
     headers: {
@@ -39,7 +39,7 @@ async function getCoinsMoreInfo(results) {
 
   try {
     const response = await fetch(
-      `${coingecko.baseUrl}/markets?vs_currency=usd`,
+      `${coingecko.baseUrl}/coins/markets?vs_currency=usd`,
       coingecko.options
     );
 
@@ -61,7 +61,7 @@ async function getCoinsMoreInfo(results) {
 
     if (notFoundCoinSymbols.length > 0) {
       const response = await fetch(
-        `${coingecko.baseUrl}/list`,
+        `${coingecko.baseUrl}/coins/list`,
         coingecko.options
       );
       const allCoinsList = await response.json();
@@ -72,7 +72,7 @@ async function getCoinsMoreInfo(results) {
       foundCoins = await Promise.all(
         foundCoinsIds.map(async (coinId) => {
           const response = await fetch(
-            `${coingecko.baseUrl}/${coinId}`,
+            `${coingecko.baseUrl}/coins/${coinId}`,
             coingecko.options
           );
 
@@ -138,7 +138,7 @@ export default async function getCoinsData(limit, currency) {
 export async function getCoinDetails(id, days) {
   try {
     const response = await fetch(
-      `${coingecko.baseUrl}/${id}/market_chart?vs_currency=usd&days=${days}`,
+      `${coingecko.baseUrl}/coins/${id}/market_chart?vs_currency=usd&days=${days}`,
       {
         ...coingecko.options,
         next: {
@@ -155,6 +155,24 @@ export async function getCoinDetails(id, days) {
     }
 
     return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getTrendingCoins() {
+  try {
+    const response = await fetch(
+      `${coingecko.baseUrl}/search/trending`,
+      coingecko.options
+    );
+
+    const coinsData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(coinsData);
+    }
+    return coinsData;
   } catch (error) {
     console.error(error);
   }

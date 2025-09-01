@@ -3,7 +3,7 @@ import Footer from '@/components/footer/Footer';
 export default function RootLayout({ children }) {
   return (
     <>
-      {children}
+      <main>{children}</main>
       <Footer />
     </>
   );

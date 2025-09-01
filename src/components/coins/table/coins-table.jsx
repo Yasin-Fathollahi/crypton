@@ -60,7 +60,7 @@ export default async function CoinsTable({ limit }) {
             </tbody>
           </table>
           <div className="text-center py-4 border-3 border-t-0 border-solid border-slate-700/80 rounded-b-2xl ">
-            <Link href="#" className="hover:text-blue-400 text-lg">
+            <Link href="/prices" className="hover:text-blue-400 text-lg">
               مشاهده همه ی ارز ها
             </Link>
           </div>

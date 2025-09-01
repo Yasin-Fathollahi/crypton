@@ -3,28 +3,34 @@ import CryptonText from '@/components/crypton/crypton-text';
 import CryptonLogo from '@/components/crypton/crypton-logo';
 import LogoutButton from './auth-button';
 import { verifySession } from 'lib/session';
+import DropDown from './drop-down';
 
 function NavLinks() {
   return (
-    <ul className="flex gap-4">
+    <ul className="flex items-center gap-4 transition-all duration-100">
+      <DropDown
+        title="معامله"
+        items={[
+          { name: 'معامله اسپات', href: '#' },
+          { name: 'معامله تعهدی', href: '#' },
+          { name: 'خرید و فروش آنی', href: '#' },
+          { name: 'تبدیل', href: '#' },
+          { name: 'تاریخچه معاملات', href: '#' },
+        ]}
+      />
       <li>
-        <Link className="hover:text-blue-500 p-2" href="#">
-          قیمت رمز ارز ها
+        <Link className="hover:text-blue-500 p-2" href="/buy">
+          خرید ارز دیجیتال
         </Link>
       </li>
       <li>
-        <Link className="hover:text-blue-500 p-2" href="#">
-          ابزار ها
+        <Link className="hover:text-blue-500 p-2" href="/prices">
+          قیمت ارز دیجیتال
         </Link>
       </li>
       <li>
-        <Link className="hover:text-blue-500 p-2" href="#">
-          درباره ما
-        </Link>
-      </li>
-      <li>
-        <Link className="hover:text-blue-500 p-2" href="#">
-          همکاری
+        <Link className="hover:text-blue-500 p-2" href="/profile">
+          پروفایل
         </Link>
       </li>
     </ul>
@@ -73,9 +79,7 @@ export default async function MainNav({ isHome, isAuth }) {
             <CryptonLogo nav />
           </Link>
         </div>
-        <div className="flex items-center">
-          <NavLinks />
-        </div>
+        <NavLinks />
         {authButton}
       </nav>
     );

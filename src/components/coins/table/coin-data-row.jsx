@@ -1,15 +1,13 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import {
   formatChangePercentage,
   formatPrice,
 } from '../../../../utils/formatters';
-// import { getCoinDetails } from 'lib/coins';
-// import Chart from '../../chart/chart';
+import CoinOverview from '../coin-overview';
+
 const Chart = dynamic(() => import('../../chart/chart'), {
   loading: () => <p className="text-white text-center">درحال دریافت چارت...</p>,
-  // ssr: false,
 });
 
 export default async function CoinRow({
@@ -19,28 +17,12 @@ export default async function CoinRow({
   const formattedPrice = formatPrice(price);
   const formattedSymbol = symbol.replace('_', '/');
 
-  // const coinDetails = await getCoinDetails(id, 1);
   const prices = details.prices.map((price) => price[1]);
-  // console.log('🚀 ~ coin-data-row.jsx:28 ~ CoinRow ~ prices:', details);
 
   return (
     <tr className="border-t-3 border-solid border-slate-700/80">
       <td>
-        <div className="flex items-center gap-4 py-2 px-2 h-full">
-          <div className="relative w-8 h-8">
-            <Image
-              src={image}
-              alt={formattedSymbol}
-              fill
-              sizes="32px"
-              className="object-contain"
-            />
-          </div>
-          <div>
-            <p>{formattedSymbol}</p>
-            {/* <p>سکه</p> */}
-          </div>
-        </div>
+        <CoinOverview image={image} symbol={formattedSymbol} />
       </td>
       <td className="py-2">
         <p>{formattedPrice}</p>
