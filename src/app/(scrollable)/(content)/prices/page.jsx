@@ -1,18 +1,16 @@
 import MainNav from '@/components/nav/main-nav';
-import Link from 'next/link';
 import OtherCoins from './_components/other-coins';
+import CoinsSummary from 'app/(scrollable)/(marketing)/_components/coins-summary';
+import { redirect } from 'next/navigation';
 
-export default async function Prices() {
-  // const { data: coins, error } = await getCoinsData(10);
-  // const coinsDetails = await Promise.allSettled(
-  //   coins.map((coin) => getCoinDetails(coin.id, 1))
-  // );
+export default async function Prices({ searchParams }) {
+  const currentPage = (await searchParams)?.page || redirect('/prices?page=1');
+
   return (
     <>
       <MainNav />
-      <OtherCoins
-      //  coins={coinsDetails}
-      />
+      <OtherCoins />
+      <CoinsSummary limit={20} page={currentPage} searchParams={searchParams} />
     </>
   );
 }

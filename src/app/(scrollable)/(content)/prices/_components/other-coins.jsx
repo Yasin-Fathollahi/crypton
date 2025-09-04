@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { FaChevronLeft } from 'react-icons/fa6';
 export default async function OtherCoins() {
   const { coins: trendingCoins } = await getTrendingCoins();
-  console.log(trendingCoins);
 
   return (
     <section>

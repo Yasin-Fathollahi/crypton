@@ -8,7 +8,7 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection />
-      <CoinsSummary />
+      <CoinsSummary limit={10} isHome />
       <Features />
       <OnchainSection />
       <FaqSection />

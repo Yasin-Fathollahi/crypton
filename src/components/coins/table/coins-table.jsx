@@ -2,15 +2,32 @@ import Link from 'next/link';
 import getCoinsData, { getCoinDetails } from 'lib/coins';
 import CoinRow from './coin-data-row';
 import ErrorBox from '@/components/error';
+import { groupToAvoidRateLimit, sleep } from '../../../../utils/helpers';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa6';
+import PaginationControls from './pagination-controls';
 
-export default async function CoinsTable({ limit }) {
-  const { data: coins, error } = await getCoinsData(limit);
+export default async function CoinsTable({
+  limit,
+  isHome,
+  page,
+  searchParams,
+}) {
+  const {
+    data: { coins, allCoinsCount },
+    error,
+  } = await getCoinsData(limit, page);
+  // const groupedCoins = groupToAvoidRateLimit(coins, 10);
+  // console.log(
+  //   '🚀 ~ coins-table.jsx:10 ~ CoinsTable ~ groupedCoins:',
+  //   groupedCoins
+  // );
+  const pagesCount = Math.ceil(allCoinsCount / limit);
+
   const coinsDetails = await Promise.allSettled(
     coins.map((coin) => getCoinDetails(coin.id, 1))
   );
 
-  // {symbol: 'BTC_IRT', price: '10483091070', daily_change_price: -0.45, low: '10406737043', high: '10574328061', …}
-
+  // async function loadNewPage() {}
   return (
     <article className="mt-10">
       {error && (
@@ -19,7 +36,7 @@ export default async function CoinsTable({ limit }) {
       {coins && (
         <>
           <div className="flex justify-between border-3 border-b-0 border-solid border-slate-700/80 rounded-t-2xl">
-            <div className="flex gap-6 p-4 ">
+            <div className="flex gap-6 p-4">
               <Link href="#" className="hover:text-blue-400">
                 رمز ارز های برتر
               </Link>
@@ -59,10 +76,19 @@ export default async function CoinsTable({ limit }) {
               ))}
             </tbody>
           </table>
+
           <div className="text-center py-4 border-3 border-t-0 border-solid border-slate-700/80 rounded-b-2xl ">
-            <Link href="/prices" className="hover:text-blue-400 text-lg">
-              مشاهده همه ی ارز ها
-            </Link>
+            {isHome && (
+              <Link href="/prices" className="hover:text-blue-400 text-lg">
+                مشاهده همه ی ارز ها
+              </Link>
+            )}
+            {!isHome && (
+              <PaginationControls
+                PageCount={pagesCount}
+                searchParams={searchParams}
+              />
+            )}
           </div>
         </>
       )}

@@ -6,6 +6,8 @@ const coingecko = {
       accept: 'application/json',
       'x-cg-demo-api-key': process.env.COINGECKO_KEY,
     },
+    cache: 'force-cache',
+    next: { revalidate: 300 },
   },
 };
 
@@ -94,7 +96,7 @@ async function getCoinsMoreInfo(results) {
   }
 }
 
-export default async function getCoinsData(limit, currency) {
+export default async function getCoinsData(limit, page = 1, currency) {
   try {
     let response = await fetch('https://api.bitpin.org/api/v1/mkt/tickers/');
 
@@ -105,8 +107,13 @@ export default async function getCoinsData(limit, currency) {
 
       throw new Error(data.error);
     }
-    const fixedLimit = currency === 'usdt' ? limit * 2 + 1 : limit * 2 - 1;
-    const limitedResults = data.slice(0, fixedLimit);
+    const fixedLimit =
+      currency === 'usdt' ? limit * 2 * page + 1 : limit * 2 * page - 1;
+    const startingElement = limit * page;
+    const limitedResults =
+      page > 1
+        ? data.slice(startingElement, fixedLimit)
+        : data.slice(0, fixedLimit);
 
     const resultsfilteredByCurrency = filterResultsByCurrency(
       limitedResults,
@@ -122,7 +129,13 @@ export default async function getCoinsData(limit, currency) {
       return { ...result, image, id };
     });
 
-    return { data: resultsWithImages, error: null };
+    return {
+      data: {
+        coins: resultsWithImages,
+        allCoinsCount: data.length / 2,
+      },
+      error: null,
+    };
   } catch (error) {
     console.error(error);
     return {
@@ -146,12 +159,10 @@ export async function getCoinDetails(id, days) {
         },
       }
     );
-    const data = await response.json();
+    const data = (await response.json()) || response.statusText;
 
     if (!response.ok) {
-      throw new Error(
-        data.error || `Faild to fetch the coin details for ${id}`
-      );
+      throw new Error(data || `Faild to fetch the coin details for ${id}`);
     }
 
     return data;
@@ -172,6 +183,7 @@ export async function getTrendingCoins() {
     if (!response.ok) {
       throw new Error(coinsData);
     }
+
     return coinsData;
   } catch (error) {
     console.error(error);

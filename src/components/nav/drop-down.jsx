@@ -2,7 +2,7 @@ import { FaCaretDown } from 'react-icons/fa6';
 import Link from 'next/link';
 export default function DropDown({ title, items }) {
   return (
-    <li className="relative group block ">
+    <li className="relative group block z-10">
       <button
         className="p-2 flex items-center gap-1 hover:cursor-default group-hover:text-blue-500"
         href="#"
