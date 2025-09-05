@@ -1,6 +1,6 @@
-# Next Crypton
+# Crypton
 
-Next Crypton is a modern cryptocurrency dashboard and information platform built with Next.js. It provides real-time market data, trending coins, and detailed analytics for a variety of cryptocurrencies. The project leverages the CoinGecko and Bitpin APIs to deliver up-to-date information and a seamless user experience.
+Crypton is a modern cryptocurrency dashboard and information platform built with Next.js. It provides real-time market data, trending coins, and detailed analytics for a variety of cryptocurrencies. The project leverages the CoinGecko and Bitpin APIs to deliver up-to-date information and a seamless user experience.
 
 ## Features
 
